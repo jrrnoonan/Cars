@@ -5,7 +5,7 @@ var mysql = require('mysql');
 
 app.use(bodyParser.json());
 
-var connection =  mysql.createConnection({
+var connection =  mysql.createPool({
 host : 'localhost',
 user : 'root',
 password: '',
@@ -14,7 +14,7 @@ database: 'cars'
 
 
 
-  connection.connect((err) =>{
+  connection.getConnection((err) =>{
     if (err) throw err;
     console.log('Mysql connected');
   });
@@ -29,10 +29,10 @@ app.post('/', function (req, res) {
 
     connection.query(insert_R,[car_make, car_model, car_year, car_vin], 
 
-    function(err,res){
+    function(err,response){
     if(err) throw err;
     else {
-         
+        res.send(JSON.stringify('Details added successfully')); 
         console.log('Details added successfully');
     }
   });
@@ -94,9 +94,6 @@ app.post('/delete', function (req, res) {
 });
 
 });	  
-
-
-connection.end();
 
 
 var server = app.listen(8081, function () {
