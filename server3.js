@@ -71,10 +71,11 @@ app.post('/edit', function (req, res) {
 
   connection.query(insert_U,[car_make, car_model ,car_year ,car_vin, car_id], 
 
-  function(err,res){
+  function(err,response){
   if(err) throw err;
   else {
       console.log('Details edited successfully');
+      res.send(JSON.stringify('Details edited successfully'));
   }
 });
 
@@ -86,10 +87,11 @@ app.post('/delete', function (req, res) {
 
   connection.query(insert_D,[car_id], 
 
-  function(err,res){
+  function(err,response){
   if(err) throw err;
   else {
       console.log('Details deleted successfully');
+      res.send(JSON.stringify('Car Profile was deleted'));
   }
 });
 

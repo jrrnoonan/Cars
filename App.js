@@ -304,6 +304,8 @@ class EditCarRecordActivity extends Component {
                 }).catch((error) => {
                   console.error(error);
                 });
+
+                this.props.navigation.navigate('Second');
       
       }
  
@@ -332,7 +334,7 @@ class EditCarRecordActivity extends Component {
              console.error(error);
           });
  
-          this.props.navigation.navigate('First');
+          this.props.navigation.navigate('Second');
  
       }
  
