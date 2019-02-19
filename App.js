@@ -1,12 +1,12 @@
 import React, { Component } from 'react'; 
 import { StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ListView, ActivityIndicator } from 'react-native'; 
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
  
 class MainActivity extends Component {
  
   static navigationOptions =
   {
-     title: 'Register Your Car',
+     title: 'Register Your Car!!!!',
   };
  
 constructor(props) {
@@ -334,7 +334,7 @@ class EditCarRecordActivity extends Component {
              console.error(error);
           });
  
-          this.props.navigation.navigate('Second');
+          this.props.navigation.navigate('First');
  
       }
  
@@ -387,7 +387,7 @@ class EditCarRecordActivity extends Component {
    
           <TextInput
    
-            placeholder="Car VIN Email Shows Here"
+            placeholder="Car VIN Shows Here"
  
             value={this.state.TextInput_Car_Vin}
    
@@ -406,7 +406,7 @@ class EditCarRecordActivity extends Component {
    
          <TouchableOpacity activeOpacity = { .4 } style={styles.TouchableOpacityStyle} onPress={this.DeleteCarRecord} >
    
-            <Text style={styles.TextStyle}> DELETE CURRENT RECORD </Text>
+            <Text style={styles.TextStyle}> Delete Car </Text>
    
          </TouchableOpacity>
     
@@ -418,7 +418,7 @@ class EditCarRecordActivity extends Component {
  
 }
  
-export default MyNewProject = StackNavigator(
+const MyNewProject = createStackNavigator(
  
   {
  
@@ -429,6 +429,9 @@ export default MyNewProject = StackNavigator(
     Third: { screen: EditCarRecordActivity }
  
   });
+
+
+export default createAppContainer(MyNewProject);
  
 const styles = StyleSheet.create({
  
