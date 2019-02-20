@@ -156,6 +156,19 @@ class ShowCarListActivity extends Component {
        return fetch('http:/192.168.137.136:8081/read')
          .then((response) => response.json())
          .then((responseJson) => {
+            // Function to sort JSON into alphatical order
+          function compareStrings(a, b) {
+
+            a = a.toUpperCase();
+            b = b.toUpperCase();
+          
+            return (a < b) ? -1 : (a > b) ? 1 : 0;
+          }
+          //Running Server response through above function
+          responseJson.sort(function(a, b) {
+            return compareStrings(a.car_make, b.car_make);
+          })
+
            let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
            this.setState({
              isLoading: false,

@@ -5,6 +5,7 @@ var mysql = require('mysql');
 
 app.use(bodyParser.json());
 
+//Connection Information
 var connection =  mysql.createPool({
 host : 'localhost',
 user : 'root',
@@ -13,12 +14,13 @@ database: 'cars'
 });
 
 
-
+//Connecting to the Database
   connection.getConnection((err) =>{
     if (err) throw err;
     console.log('Mysql connected');
   });
 
+//Route for inserting cars to the database  
 app.post('/', function (req, res) {
 
     var car_make = req.body.car_make;
@@ -41,6 +43,7 @@ app.post('/', function (req, res) {
  
 });	
 
+//Route for getting information from the database
 app.get('/read', function(req, res){
 
 
@@ -58,6 +61,7 @@ app.get('/read', function(req, res){
     
   });
 
+  //Route for editing record from the database
 app.post('/edit', function (req, res) {
   var car_id = req.body.car_id;
   var car_make = req.body.car_make;
@@ -67,7 +71,7 @@ app.post('/edit', function (req, res) {
   var insert_U = 'UPDATE cars set car_make = ?, car_model =?, car_year = ?, car_vin = ? WHERE car_id= ?';
 
     
-//Inserting a record into details
+
 
   connection.query(insert_U,[car_make, car_model ,car_year ,car_vin, car_id], 
 
@@ -81,6 +85,7 @@ app.post('/edit', function (req, res) {
 
 });	
 
+//Route for deleting a car from the database
 app.post('/delete', function (req, res) {
   var car_id = req.body.car_id;
     var insert_D = 'DELETE FROM cars WHERE car_id = ?';
@@ -97,7 +102,7 @@ app.post('/delete', function (req, res) {
 
 });	  
 
-
+//Server connection information. Server is available at localhost:8081
 var server = app.listen(8081, function () {
 
     var host = server.address().address
