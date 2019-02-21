@@ -26,10 +26,11 @@ app.post('/', function (req, res) {
     var car_make = req.body.car_make;
     var car_model = req.body.car_model;
     var car_year = req.body.car_year;
+    var car_kilometers = req.body.car_kilometers;
     var car_vin = req.body.car_vin;
-    var insert_R = 'INSERT INTO cars(car_make,car_model,car_year,car_vin) VALUE(?,?,?,?)';
+    var insert_R = 'INSERT INTO cars(car_make,car_model,car_year, car_kilometers, car_vin) VALUE(?,?,?,?)';
 
-    connection.query(insert_R,[car_make, car_model, car_year, car_vin], 
+    connection.query(insert_R,[car_make, car_model, car_year, car_kilometers, car_vin], 
 
     function(err,response){
     if(err) throw err;
@@ -67,13 +68,14 @@ app.post('/edit', function (req, res) {
   var car_make = req.body.car_make;
   var car_model = req.body.car_model;
   var car_year = req.body.car_year;
+  var car_kilometers = req.body.car_kilometers;
   var car_vin = req.body.car_vin;
-  var insert_U = 'UPDATE cars set car_make = ?, car_model =?, car_year = ?, car_vin = ? WHERE car_id= ?';
+  var insert_U = 'UPDATE cars set car_make = ?, car_model =?, car_year = ?, car_kilometers = ?, car_vin = ? WHERE car_id= ?';
 
     
 
 
-  connection.query(insert_U,[car_make, car_model ,car_year ,car_vin, car_id], 
+  connection.query(insert_U,[car_make, car_model, car_year, car_kilometers,car_vin, car_id], 
 
   function(err,response){
   if(err) throw err;
@@ -103,7 +105,7 @@ app.post('/delete', function (req, res) {
 });	  
 
 //Server connection information. Server is available at localhost:8081
-var server = app.listen(8081, function () {
+var server = app.listen(8081, function () { 
 
     var host = server.address().address
 

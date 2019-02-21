@@ -18,6 +18,7 @@ constructor(props) {
      TextInput_Car_Make: '',
      TextInput_Car_Model: '',
      TextInput_Car_Year: '',
+     TextInput_Car_Kilometers: '',
      TextInput_Car_Vin: '',
  
    }
@@ -34,12 +35,10 @@ constructor(props) {
       },
       body: JSON.stringify({
  
-        car_make : this.state.TextInput_Car_Make,
- 
-        car_model : this.state.TextInput_Car_Model,
- 
+        car_make : this.state.TextInput_Car_Make, 
+        car_model : this.state.TextInput_Car_Model, 
         car_year : this.state.TextInput_Car_Year,
- 
+        car_kilometers: this.state.TextInput_Car_Kilometers, 
         car_vin : this.state.TextInput_Car_Vin
  
       })
@@ -102,6 +101,17 @@ constructor(props) {
  
          style={styles.TextInputStyleClass}
        />
+
+       <TextInput
+         
+         placeholder="Enter the car's Kilometers (e.g. 124999)"
+ 
+         onChangeText={ TextInputValue => this.setState({ TextInput_Car_Kilometers : TextInputValue }) }
+ 
+         underlineColorAndroid='transparent'
+ 
+         style={styles.TextInputStyleClass}
+       />
  
        <TextInput
  
@@ -148,7 +158,7 @@ class ShowCarListActivity extends Component {
  
   static navigationOptions =
   {
-     title: 'ShowCarListActivity',
+     title: 'Car List',
   };
  //Fetch Student record from database
   componentDidMount() {
@@ -182,7 +192,7 @@ class ShowCarListActivity extends Component {
          });
      }
     
-     GetCarIDFunction=(car_id,car_make, car_model, car_year, car_vin)=>{
+     GetCarIDFunction=(car_id,car_make, car_model, car_year, car_kilometers, car_vin)=>{
  
           this.props.navigation.navigate('Third', { 
  
@@ -190,6 +200,7 @@ class ShowCarListActivity extends Component {
             MAKE : car_make,
             MODEL : car_model,
             YEAR : car_year,
+            KILOMETERS: car_kilometers,
             VIN : car_vin
  
           });
@@ -234,6 +245,7 @@ class ShowCarListActivity extends Component {
                          rowData.car_make, 
                          rowData.car_model, 
                          rowData.car_year, 
+                         rowData.car_kilometers,
                          rowData.car_vin
                          )} > 
  
@@ -261,6 +273,7 @@ class EditCarRecordActivity extends Component {
          TextInput_Car_Make: '',
          TextInput_Car_Model: '',
          TextInput_Car_Year: '',
+         TextInput_Car_Kilometers:'',
          TextInput_Car_Vin: '',
     
        }
@@ -275,6 +288,7 @@ class EditCarRecordActivity extends Component {
         TextInput_Car_Make: this.props.navigation.state.params.MAKE,
         TextInput_Car_Model: this.props.navigation.state.params.MODEL,
         TextInput_Car_Year: this.props.navigation.state.params.YEAR,
+        TextInput_Car_Kilometers: this.props.navigation.state.params.KILOMETERS,
         TextInput_Car_Vin: this.props.navigation.state.params.VIN,
       })
  
@@ -282,7 +296,7 @@ class EditCarRecordActivity extends Component {
   
     static navigationOptions =
     {
-       title: 'EditCarRecordActivity',
+       title: 'Edit Car Records',
     };
  
     UpdateCarRecord = () =>{
@@ -296,14 +310,11 @@ class EditCarRecordActivity extends Component {
             },
             body: JSON.stringify({
       
-              car_id : this.state.TextInput_Car_Id,
- 
-              car_make : this.state.TextInput_Car_Make,
-      
-              car_model : this.state.TextInput_Car_Model,
-      
-              car_year : this.state.TextInput_Car_Year,
-      
+              car_id : this.state.TextInput_Car_Id, 
+              car_make : this.state.TextInput_Car_Make,      
+              car_model : this.state.TextInput_Car_Model,      
+              car_year : this.state.TextInput_Car_Year,              
+              car_kilometers: this.state.TextInput_Car_Kilometers,
               car_vin: this.state.TextInput_Car_Vin
       
             })
@@ -361,7 +372,7 @@ class EditCarRecordActivity extends Component {
     
           <TextInput
             
-            placeholder="Car Make Shows Here"
+            placeholder="Enter the Car's Make Here (e.g. Toyota)"
             
             value={this.state.TextInput_Car_Make}
    
@@ -374,7 +385,7 @@ class EditCarRecordActivity extends Component {
    
          <TextInput
             
-            placeholder="Car Model  Shows Here"
+            placeholder="Enter the Car's Model Here (e.g. Camry)"
  
             value={this.state.TextInput_Car_Model}
    
@@ -387,7 +398,7 @@ class EditCarRecordActivity extends Component {
    
          <TextInput
             
-            placeholder="Car Model Year Shows Here"
+            placeholder="Enter the Car's Year Here (e.g. 1999)"
  
             value={this.state.TextInput_Car_Year}
    
@@ -397,10 +408,23 @@ class EditCarRecordActivity extends Component {
    
             style={styles.TextInputStyleClass}
           />
+
+          <TextInput
+            
+            placeholder="Enter the Car's Kilometers Here (e.g. 123642)"
+ 
+            value={this.state.TextInput_Car_Kilometers}
+   
+            onChangeText={ TextInputValue => this.setState({ TextInput_Car_Kilometers : TextInputValue }) }
+   
+            underlineColorAndroid='transparent'
+   
+            style={styles.TextInputStyleClass}
+          />  
    
           <TextInput
    
-            placeholder="Car VIN Shows Here"
+            placeholder="Enter the Car's VIN Here (e.g 231239dkj124j)"
  
             value={this.state.TextInput_Car_Vin}
    
@@ -435,10 +459,8 @@ const MyNewProject = createStackNavigator(
  
   {
  
-    First: { screen: MainActivity },
- 
-    Second: { screen: ShowCarListActivity },
- 
+    First: { screen: MainActivity }, 
+    Second: { screen: ShowCarListActivity }, 
     Third: { screen: EditCarRecordActivity }
  
   });
