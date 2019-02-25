@@ -1,12 +1,12 @@
-var express = require ('express');
-var app = express();
-var bodyParser = require ('body-parser');
-var mysql = require('mysql');
+const express = require ('express');
+const app = express();
+const bodyParser = require ('body-parser');
+const mysql = require('mysql');
 
 app.use(bodyParser.json());
 
 //Connection Information
-var connection =  mysql.createPool({
+const connection =  mysql.createPool({
 host : 'localhost',
 user : 'root',
 password: '',
@@ -23,12 +23,12 @@ database: 'cars'
 //Route for inserting cars to the database  
 app.post('/', function (req, res) {
 
-    var car_make = req.body.car_make;
-    var car_model = req.body.car_model;
-    var car_year = req.body.car_year;
-    var car_kilometers = req.body.car_kilometers;
-    var car_vin = req.body.car_vin;
-    var insert_R = 'INSERT INTO cars(car_make, car_model,car_year, car_kilometers, car_vin) VALUE(?,?,?,?,?)';
+    const car_make = req.body.car_make;
+    const car_model = req.body.car_model;
+    const car_year = req.body.car_year;
+    const car_kilometers = req.body.car_kilometers;
+    const car_vin = req.body.car_vin;
+    const insert_R = 'INSERT INTO cars(car_make, car_model,car_year, car_kilometers, car_vin) VALUE(?,?,?,?,?)';
 
     connection.query(insert_R,[car_make, car_model, car_year, car_kilometers, car_vin], 
 
@@ -48,7 +48,7 @@ app.post('/', function (req, res) {
 app.get('/read', function(req, res){
 
 
-  var read_R = 'SELECT * FROM cars';
+  const read_R = 'SELECT * FROM cars';
   
  
       
@@ -64,13 +64,13 @@ app.get('/read', function(req, res){
 
   //Route for editing record from the database
 app.post('/edit', function (req, res) {
-  var car_id = req.body.car_id;
-  var car_make = req.body.car_make;
-  var car_model = req.body.car_model;
-  var car_year = req.body.car_year;
-  var car_kilometers = req.body.car_kilometers;
-  var car_vin = req.body.car_vin;
-  var insert_U = 'UPDATE cars set car_make = ?, car_model =?, car_year = ?, car_kilometers = ?, car_vin = ? WHERE car_id= ?';
+  const car_id = req.body.car_id;
+  const car_make = req.body.car_make;
+  const car_model = req.body.car_model;
+  const car_year = req.body.car_year;
+  const car_kilometers = req.body.car_kilometers;
+  const car_vin = req.body.car_vin;
+  const insert_U = 'UPDATE cars set car_make = ?, car_model =?, car_year = ?, car_kilometers = ?, car_vin = ? WHERE car_id= ?';
 
     
 
@@ -89,8 +89,8 @@ app.post('/edit', function (req, res) {
 
 //Route for deleting a car from the database
 app.post('/delete', function (req, res) {
-  var car_id = req.body.car_id;
-    var insert_D = 'DELETE FROM cars WHERE car_id = ?';
+  const car_id = req.body.car_id;
+    const insert_D = 'DELETE FROM cars WHERE car_id = ?';
 
   connection.query(insert_D,[car_id], 
 
@@ -105,11 +105,11 @@ app.post('/delete', function (req, res) {
 });	  
 
 //Server connection information. Server is available at localhost:8081
-var server = app.listen(8081, function () { 
+const server = app.listen(8081, function () { 
 
-    var host = server.address().address
+    const host = server.address().address
 
-    var port = server.address().port
+    const port = server.address().port
 
     console.log("Example app listening at http://%s:%s", host, port)
 
