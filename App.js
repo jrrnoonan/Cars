@@ -165,7 +165,7 @@ class ShowCarListActivity extends Component {
  //Fetch Student record from database
   componentDidMount() {
     
-       return fetch('http:/192.168.137.136:8081/read')
+       return fetch('http:/192.168.137.136:8081/')
          .then((response) => response.json())
          .then((responseJson) => {
             // Sorting JSON into alphatical order by make then model
