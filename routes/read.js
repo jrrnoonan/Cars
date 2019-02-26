@@ -10,7 +10,7 @@ const connection =  mysql.createPool({
     });
     
 
-routes.get('/', function(req, res){
+routes.get('/read', function(req, res){
 
     //mysql statement to be sent to database  
     const read_R = 'SELECT * FROM cars';   

@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOpacity, ListView, ActivityIndicator } from 'react-native'; 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import {firstBy} from 'thenby';
-
+const localhost = 'http://192.168.137.136:8081/'
+ //Creates car Registration Class, the first screen of the App. The name CarRegistration is used in react-navigation below
+class CarRegistration extends Component {
  
-class MainActivity extends Component {
- 
+  //Adds Register Your Car as a title at top of the page
   static navigationOptions =
   {
-     title: 'Register Your Car!!!!',
+     title: 'Register Your Car',
   };
  
+ //Creates 5 states, which will be used to hold the entered value from TextInput boxes 
 constructor(props) {
  
    super(props)
@@ -27,9 +29,10 @@ constructor(props) {
  
  }
  
+ //This function uses Fetch to send the data inserted in the text input to
  InsertCarRecordsToServers = () =>{
  
-      fetch('http:/192.168.137.136:8081/', {
+      fetch(localhost + 'insert', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -165,7 +168,7 @@ class ShowCarListActivity extends Component {
  //Fetch Student record from database
   componentDidMount() {
     
-       return fetch('http:/192.168.137.136:8081/')
+       return fetch(localhost + 'read/')
          .then((response) => response.json())
          .then((responseJson) => {
             // Sorting JSON into alphatical order by make then model
@@ -300,7 +303,7 @@ class EditCarRecordActivity extends Component {
  
     UpdateCarRecord = () =>{
       
-            fetch('http:/192.168.137.136:8081/edit', {
+            fetch(localhost + 'edit', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -335,7 +338,7 @@ class EditCarRecordActivity extends Component {
  
     DeleteCarRecord = () =>{
         
-          fetch('http:/192.168.137.136:8081/delete', {
+          fetch(localhost + 'delete', {
           method: 'POST',
           headers: {
           'Accept': 'application/json',
@@ -453,19 +456,21 @@ class EditCarRecordActivity extends Component {
     }
  
 }
- 
-const MyNewProject = createStackNavigator(
+
+
+//Creates variable that holds the different screens for the app
+const carRegistratonProject = createStackNavigator(
  
   {
  
-    First: { screen: MainActivity }, 
+    First: { screen: CarRegistration }, 
     Second: { screen: ShowCarListActivity }, 
     Third: { screen: EditCarRecordActivity }
  
   });
 
-
-export default createAppContainer(MyNewProject);
+//Calls the above variables, creating the app with the three screens outlined and named above
+export default createAppContainer(carRegistratonProject);
  
 const styles = StyleSheet.create({
  

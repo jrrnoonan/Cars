@@ -10,7 +10,7 @@ const connection =  mysql.createPool({
     });
     
 
-    routes.post('/', function (req, res) {
+    routes.post('/insert', function (req, res) {
 
         const car_make = req.body.car_make;
         const car_model = req.body.car_model;
