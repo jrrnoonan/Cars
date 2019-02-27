@@ -3,7 +3,8 @@ import { StyleSheet, View, Alert, TextInput, Button, Text, Platform, TouchableOp
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import {firstBy} from 'thenby';
 const localhost = 'http://192.168.137.136:8081/'
- //Creates car Registration Class, the first screen of the App. The name CarRegistration is used in react-navigation below
+ 
+//Creates car Registration Class, the first screen of the App. The name CarRegistration is used in react-navigation below
 class CarRegistration extends Component {
  
   //Adds Register Your Car as a title at top of the page
@@ -59,27 +60,30 @@ constructor(props) {
           });
  
 }
- 
+ //Function to go to the second page of the app 
  GoTo_Show_CarList_Activity_Function = () =>
   {
     this.props.navigation.navigate('Second');
     
   }
  
+  //Contains title, textbox, and buttons to be displayed on first page of appp
  render() {
    return (
  
 <View style={styles.MainContainer}>
  
- 
+            
        <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 7}}> Car Registration Form </Text>
- 
+        
        <TextInput
-         
+        //Text to be displayed when box is empty 
          placeholder="Enter Car Make (e.g. Honda)"
- 
+        
+        //Sets the text inserted inside the box to this.state.TextInput_Car_Make
          onChangeText={ TextInputValue => this.setState({ TextInput_Car_Make : TextInputValue }) }
- 
+          
+          //Essentially turns off text underlining
          underlineColorAndroid='transparent'
  
          style={styles.TextInputStyleClass}
@@ -128,13 +132,14 @@ constructor(props) {
  
          style={styles.TextInputStyleClass}
        />
- 
+       {/*Creates a button. When pressed, it calls the InsertCarRecordsToServers function. This sends the values in the 
+       textbox to the server to create a new car */} 
       <TouchableOpacity activeOpacity = { .4 } style={styles.TouchableOpacityStyle} onPress={this.InsertCarRecordsToServers} >
- 
+        
         <Text style={styles.TextStyle}> Insert Car Records to Server </Text>
  
       </TouchableOpacity>
- 
+       {/*Creates a button that loads the second page of the app, the list of all cars in the database*/}
       <TouchableOpacity activeOpacity = { .4 } style={styles.TouchableOpacityStyle} onPress={this.GoTo_Show_CarList_Activity_Function} >
  
         <Text style={styles.TextStyle}> Show all Car records</Text>
@@ -148,8 +153,10 @@ constructor(props) {
  }
 }
  
+//ShowCarListActivity is the second page of the app. It displays all the cars in the database
 class ShowCarListActivity extends Component {
  
+  //Creating a Boolean type state names isLoading. This is used to show the activity indicator when data is loading.
   constructor(props) { 
  
     super(props);
@@ -161,26 +168,28 @@ class ShowCarListActivity extends Component {
     }
   }
  
+  //This sets the title of the second page to Car List
   static navigationOptions =
   {
      title: 'Car List',
   };
- //Fetch Student record from database
+ 
+  //componentDidMount will call the Fetch statement as soon as page loads
   componentDidMount() {
-    
+        //Fetch Statement to retrieve all cars in database
        return fetch(localhost + 'read/')
+       //Turning the response into JSON
          .then((response) => response.json())
+         //Putting the response in a variable called responseJSON
          .then((responseJson) => {
-            // Sorting JSON into alphatical order by make then model
-
+            
+          // Sorting JSON into alphatical order by make then model
            responseJson.sort(
              firstBy("car_make", {ignoreCase:true})
              .thenBy("car_model")
-             
           ); 
           
-          //Running Server response through above function
-         
+                   
            let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
            this.setState({
              isLoading: false,
