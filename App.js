@@ -30,7 +30,7 @@ constructor(props) {
  
  }
  
- //This function uses Fetch to send the data inserted in the text input to
+ //This function uses Fetch to send the data inserted in the text input to the server
  InsertCarRecordsToServers = () =>{
  
       fetch(localhost + 'insert', {
@@ -67,7 +67,7 @@ constructor(props) {
     
   }
  
-  //Contains title, textbox, and buttons to be displayed on first page of appp
+  //Contains title, textbox, and buttons to be displayed on first page of app
  render() {
    return (
  
@@ -203,8 +203,10 @@ class ShowCarListActivity extends Component {
          });
      }
     
+
+
      GetCarIDFunction=(car_id,car_make, car_model, car_year, car_kilometers, car_vin)=>{
- 
+          //navigates to the third page
           this.props.navigation.navigate('Third', { 
  
             ID :  car_id,
