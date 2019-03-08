@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Car Project",
-    "slug": "Cars",
+    "name": "flatlistcars",
+    "slug": "flatlistcars",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
