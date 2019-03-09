@@ -12,7 +12,7 @@ const connection =  mysql.createPool({
     });
     
 // Post request that edits the car information in the database
-    routes.post('/edit', function (req, res) {
+    routes.put('/edit', function (req, res) {
         //putting information from post request into variables that can be used in mysql statement
         const car_id = req.body.car_id;
         const car_make = req.body.car_make;

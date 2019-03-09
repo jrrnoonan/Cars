@@ -1,14 +1,12 @@
 const routes = require('express').Router();
 const mysql = require('mysql');
 
-
 const connection =  mysql.createPool({
-    host : 'localhost',
-    user : 'root',
-    password: '',
-    database: 'cars'
-    });
-    
+  host : 'localhost',
+  user : 'root',
+  password: '',
+  database: 'cars'
+  }); 
 
 routes.get('/read', function(req, res){
 

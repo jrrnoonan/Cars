@@ -1,5 +1,6 @@
 const routes = require('express').Router();
 const mysql = require('mysql');
+var bodyParser = require('body-parser');
 
 
 const connection =  mysql.createPool({
@@ -28,6 +29,7 @@ const connection =  mysql.createPool({
         else {
             res.send(JSON.stringify('Details added successfully')); 
             console.log('Details added successfully');
+            
         }
       });
     

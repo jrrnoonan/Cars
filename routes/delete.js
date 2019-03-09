@@ -10,7 +10,7 @@ const connection =  mysql.createPool({
     });
     
     //post request to delete data from database
-    routes.post('/delete', function (req, res) {
+    routes.delete('/delete', function (req, res) {
         const car_id = req.body.car_id;
         //mysql statement to be sent to database
           const insert_D = 'DELETE FROM cars WHERE car_id = ?';

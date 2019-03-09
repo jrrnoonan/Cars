@@ -47,7 +47,7 @@ class editCars extends Component {
     UpdateCarRecord = () =>{
       
             fetch(localhost + 'edit', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ class editCars extends Component {
     DeleteCarRecord = () =>{
         
           fetch(localhost + 'delete', {
-          method: 'POST',
+          method: 'DELETE',
           headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
